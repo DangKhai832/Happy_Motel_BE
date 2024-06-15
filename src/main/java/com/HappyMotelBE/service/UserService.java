@@ -60,7 +60,12 @@ public class UserService {
     }
 
     public User getUser(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy người dùng") );
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXITED));
+        if(user.getIsDelete() == 1) {
+            throw new AppException(ErrorCode.USER_HAS_BEEN_DELETED);
+        }
+        return user;
     }
 
     public User updateUser(UserRequest request) {
@@ -93,8 +98,12 @@ public class UserService {
 
         return userRepository.save(user);
     }
-//
-//    public void deleteUser(String id) {
-//        userRepository.deleteById(id);
-//    }
+
+    public void deleteUser(Long id) {
+        User user = getUser(id);
+        user.setIsDelete(1);
+        user.setUpdateTime(new Date());
+        userRepository.save(user);
+    }
+
 }

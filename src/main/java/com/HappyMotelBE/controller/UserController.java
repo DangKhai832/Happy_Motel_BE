@@ -38,10 +38,12 @@ public class UserController {
     User updateUser(@RequestBody UserRequest request) {
         return userService.updateUser(request);
     }
-//
-//    @DeleteMapping("/{userId}")
-//    String deleteUser(@PathVariable String userId) {
-//        userService.deleteUser(userId);
-//        return "User has been deleted";
-//    }
+
+    @GetMapping("/delete/{userId}")
+    ApiResponse deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
+        ApiResponse<User> apiResponse = new ApiResponse<>();
+        apiResponse.setMessage("Đã xóa người dùng thành công");
+        return apiResponse;
+    }
 }

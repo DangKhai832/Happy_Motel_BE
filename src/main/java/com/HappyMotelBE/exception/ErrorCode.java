@@ -7,10 +7,11 @@ public enum ErrorCode {
     INVALID_PASSWORD(1004, "Password must be at least 8 characters"),
     INVALID_USERNAME(1003, "Username must be at least 8 characters"),
     USER_NOT_EXITED(1005, "User not exited"),
-    UNAUTHENTICATED(1006, "Unauthenticated"),
+    UNAUTHENTICATED(1006, "Wrong password"),
     CANNOT_CREATE_TOKEN(1007, "Cannot create tokens"),
     DUPLICATE_EMAIL(1008, "Đã tồn tại email này"),
     DUPLICATE_USERNAME(1009, "Username đã bị trùng"),
+    USER_HAS_BEEN_DELETED(1010, "Người dùng đã bị xóa"),
     ;
     int code;
     String message;
